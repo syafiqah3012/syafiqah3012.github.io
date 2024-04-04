@@ -26,8 +26,5 @@ function signIn() {
 
     document.body.appendChild(form);
     form.submit();
-
-    // Redirect to data.html after submitting the form
-    window.location.href = 'data.html';
 }
 
