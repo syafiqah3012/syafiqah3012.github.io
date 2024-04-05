@@ -10,11 +10,13 @@ let info = document.getElementById("info");
 
 // Function to redirect to data.html page
 function redirectToDataPage() {
+    console.log("Redirecting to data.html...");
     window.location.href = 'data.html';
 }
 
 // Show All Data in Web from localStorage
 function showUserData() {
+    console.log("Showing user data...");
     if (localStorage.getItem("infos")) {
         let userInfo = JSON.parse(localStorage.getItem("infos"));
 
@@ -22,12 +24,12 @@ function showUserData() {
         sign.classList.add("d-none");
         out.classList.remove("d-none");
 
-        fullname.innerHTML = userInfo.fullnameL;
+        fullname.textContent = userInfo.fullnameL;
         photo.src = userInfo.photo_linkL;
-        first.innerHTML = userInfo.firstL;
-        last.innerHTML = userInfo.lastL;
-        mail.innerHTML = userInfo.mailL;
-        id_num.innerHTML = userInfo.id_numL;
+        first.textContent = userInfo.firstL;
+        last.textContent = userInfo.lastL;
+        mail.textContent = userInfo.mailL;
+        id_num.textContent = userInfo.id_numL;
     } else {
         info.classList.add("d-none");
         sign.classList.remove("d-none");
@@ -39,6 +41,7 @@ window.addEventListener("load", showUserData());
 
 // Function to handle sign-in response
 function handleCredentialResponse(response) {
+    console.log("Handling sign-in response...");
     const payload = decodeJwtResponse(response.credential);
 
     let userInfo = {
@@ -57,17 +60,20 @@ function handleCredentialResponse(response) {
 
 // Function to decode JWT response
 function decodeJwtResponse(data) {
+    console.log("Decoding JWT response...");
     let tokens = data.split(".");
     return JSON.parse(atob(tokens[1]));
 }
 
 // Function to handle sign-out
 out.addEventListener("click", () => {
+    console.log("Signing out...");
     localStorage.clear();
     info.classList.add("d-none");
     sign.classList.remove("d-none");
     out.classList.add("d-none");
 });
+
 
 
 
