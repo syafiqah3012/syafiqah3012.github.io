@@ -537,7 +537,10 @@ function addSphereObject(sphereVector, index, length) {
 
 function addHelixObject(helixVector1, helixVector2, index) {
     const theta = index * 0.175 * 2 + Math.PI; // Double the angle increment
-    const y = (index % 2 === 0 ? -1 : 1) * 8 * Math.floor(index / 4) + 450; // Adjusted y-coordinate calculation
+
+    // Adjusted y-coordinate calculation for DNA-like shape
+    const helixHeight = 40; // Adjust this value to control the height of the helix
+    const y = (index % 2 === 0 ? -1 : 1) * helixHeight * Math.floor(index / 4) + 450;
 
     let object = new THREE.Object3D();
 
@@ -551,6 +554,7 @@ function addHelixObject(helixVector1, helixVector2, index) {
 
     targets.helix.push(object);
 }
+
 
 
 
