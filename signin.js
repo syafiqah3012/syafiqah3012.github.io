@@ -9,7 +9,7 @@ function signIn() {
 
     let params ={
         "client_id": clientId,
-        "redirect_uri": "https://syafiqah3012.github.io/oauth/callback",
+        "redirect_uri": "https://syafiqah3012.github.io/data.html",
         "response_type": "token",
         "scope": "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/youtube.readonly",
         "include_granted_scopes": true,
@@ -27,7 +27,5 @@ function signIn() {
     document.body.appendChild(form);
     form.submit();
 
-    // Redirect to data.html after submitting the form
-    window.location.href = 'data.html';
 }
 
