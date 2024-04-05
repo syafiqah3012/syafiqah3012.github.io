@@ -544,7 +544,7 @@ function addHelixObject(helixVector1, helixVector2, index) {
 
     object.position.setFromCylindricalCoords(900, theta, y);
 
-    const scaleFactor = 1.2; // Adjust scale factor as needed to bring helixVector1 and helixVector2 closer
+    const scaleFactor = 0.5; // Adjust scale factor as needed to bring helixVector1 and helixVector2 closer
 
     if (index % 4 < 2) { // Alternate between major and minor grooves
         helixVector1.copy(object.position).multiplyScalar(scaleFactor);
