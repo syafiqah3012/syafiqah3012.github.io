@@ -537,20 +537,21 @@ function addSphereObject(sphereVector, index, length) {
 
 function addHelixObject(helixVector1, helixVector2, index) {
     const theta = index * 0.175 * 2 + Math.PI; // Double the angle increment
-    const y = -(index * 8) + 450; // Same y-coordinate calculation
+    const y = (index % 2 === 0 ? -1 : 1) * 8 * Math.floor(index / 4) + 450; // Adjusted y-coordinate calculation
 
     let object = new THREE.Object3D();
 
-    if (index % 2 === 0) {
-        object.position.setFromCylindricalCoords(900, theta, y);
+    object.position.setFromCylindricalCoords(900, theta, y);
+
+    if (index % 4 < 2) { // Alternate between the two helix vectors
         object.lookAt(helixVector1);
     } else {
-        object.position.setFromCylindricalCoords(900, theta, y);
         object.lookAt(helixVector2);
     }
 
     targets.helix.push(object);
 }
+
 
 
 
