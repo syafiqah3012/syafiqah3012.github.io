@@ -544,16 +544,19 @@ function addHelixObject(helixVector1, helixVector2, index) {
 
     object.position.setFromCylindricalCoords(900, theta, y);
 
+    const scaleFactor = 1.2; // Adjust scale factor as needed to bring helixVector1 and helixVector2 closer
+
     if (index % 4 < 2) { // Alternate between major and minor grooves
-        helixVector1.copy(object.position).multiplyScalar(2);
+        helixVector1.copy(object.position).multiplyScalar(scaleFactor);
         object.lookAt(helixVector1);
     } else {
-        helixVector2.copy(object.position).multiplyScalar(1.5); // Adjust scale for minor groove
+        helixVector2.copy(object.position).multiplyScalar(scaleFactor); // Adjust scale for minor groove
         object.lookAt(helixVector2);
     }
 
     targets.helix.push(object);
 }
+
 
 
 
