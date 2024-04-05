@@ -545,10 +545,10 @@ function addHelixObject(helixVector1, helixVector2, index) {
     object.position.setFromCylindricalCoords(900, theta, y);
 
     if (index % 4 < 2) { // Alternate between major and minor grooves
-        majorGrooveVector.copy(object.position).multiplyScalar(2);
+        helixVector1.copy(object.position).multiplyScalar(2);
         object.lookAt(helixVector1);
     } else {
-        minorGrooveVector.copy(object.position).multiplyScalar(1.5); // Adjust scale for minor groove
+        helixVector2.copy(object.position).multiplyScalar(1.5); // Adjust scale for minor groove
         object.lookAt(helixVector2);
     }
 
