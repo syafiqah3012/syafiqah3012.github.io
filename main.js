@@ -536,48 +536,35 @@ function addSphereObject(sphereVector, index, length) {
     targets.sphere.push(object);
 }
 
-function addHelixObject(helixVector, index) {
+function addHelixObject(helixVector1, helixVector2, index) {
     const theta = index * 0.175 + Math.PI;
     const y = -(index * 8) + 450;
 
-    // Create four objects for the DNA structure
-    let object1 = new THREE.Object3D();
-    let object2 = new THREE.Object3D();
+    let object = new THREE.Object3D();
 
-    // Calculate positions for the double helix
-    const radius = 400; // Radius of the helix
-    const pitch = 20; // Distance between each turn of the helix
-    const separation = 30; // Distance between the two strands of the DNA
+    // Calculate positions for the two helices
+    const radius = 900;
+    const twist = 3; // Adjust twist factor as needed
+    const height = 150; // Adjust height between the helices as needed
 
-    // Calculate positions for the first helix
     const x1 = radius * Math.cos(theta);
-    const z1 = radius * Math.sin(theta);
-    const y1 = y;
+    const z1 = radius * Math.sin(theta) + height / 2 * Math.sin(theta * twist);
 
-    // Calculate positions for the second helix, shifted slightly
-    const x2 = radius * Math.cos(theta + Math.PI);
-    const z2 = radius * Math.sin(theta + Math.PI);
-    const y2 = y;
+    const x2 = radius * Math.cos(theta);
+    const z2 = radius * Math.sin(theta) - height / 2 * Math.sin(theta * twist);
 
-    // Set positions for the two helix objects
-    object1.position.set(x1, y1, z1);
-    object2.position.set(x2, y2, z2);
+    // Set object positions for the two helices
+    object.position.set(x1, y, z1);
+    helixVector1.set(x1 * 2, y, z1 * 2);
+    object.lookAt(helixVector1);
+    targets.helix.push(object);
 
-    // Rotate helix objects to form the double helix
-    const angleOffset = Math.PI / 8; // Adjust this angle for tighter or looser helix
-    object1.rotation.y = theta + angleOffset;
-    object2.rotation.y = theta + Math.PI + angleOffset;
-
-    // Look at the helixVector for both objects
-    object1.lookAt(helixVector);
-    object2.lookAt(helixVector);
-
-    // Push the helix objects to the targets.helix array
-    targets.helix.push(object1);
+    let object2 = new THREE.Object3D();
+    object2.position.set(x2, y, z2);
+    helixVector2.set(x2 * 2, y, z2 * 2);
+    object2.lookAt(helixVector2);
     targets.helix.push(object2);
 }
-
-
 
 
 function addGridObject(index) {
