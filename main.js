@@ -273,7 +273,8 @@ function initTrackbarControls() {
 function generateGeometricLayouts() {
 
     let sphereVector = new THREE.Vector3();
-    let helixVector = new THREE.Vector3();
+    let helixVector1 = new THREE.Vector3();
+    let helixVector2 = new THREE.Vector3();
 
     for (let i = 0, l = targets.simple.length; i < l; i++) {
         addSphereObject(sphereVector, i, l);
