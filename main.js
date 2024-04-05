@@ -183,20 +183,21 @@ function addClickListeners() {
 }
 
 function simpleObjectsLayout() {
+    const numColumns = 20;
+    const numRows = 10;
 
     for (let i = 0; i < table.length; i += 5) {
-
         let object = new THREE.CSS3DObject(htmlElement(table, i));
-        object.position.x = Math.random() * 4000 - 2000;
-        object.position.y = Math.random() * 4000 - 2000;
+        const col = i / 5 % numColumns;
+        const row = Math.floor(i / 5 / numColumns);
+        object.position.x = (col * 140) - (numColumns * 140) / 2 + 70; 
+        object.position.y = -(row * 180) + (numRows * 180) / 2 - 90; 
         object.position.z = Math.random() * 4000 - 2000;
 
         scene.add(object);
         targets.simple.push(object);
-        tableLayout(table, i);
-
+        tableLayout(table, i, col, row);
     }
-
 }
 
 function htmlElement(table, i) {
@@ -243,14 +244,12 @@ function elementClickHandler(i){
         .start();
 }
 
-function tableLayout(table, index) {
-
+function tableLayout(table, index, col, row) {
     let object = new THREE.Object3D();
 
-    object.position.x = (table[index + 3] * 140) - 1330;
-    object.position.y = -(table[index + 4] * 180) + 990;
+    object.position.x = (col * 140) - 1330;
+    object.position.y = -(row * 180) + 990;
     targets.table.push(object);
-
 }
 
 function addClickListener(target, elementId) {
@@ -299,29 +298,30 @@ function addSphereObject(sphereVector, index, length) {
     targets.sphere.push(object);
 }
 
-function addHelixObject(helixVector, index) {
+function addHelixObject(helixVector1, helixVector2, index) {
 
     const theta = index * 0.175 + Math.PI;
     const y = -(index * 8) + 450;
     let object = new THREE.Object3D();
 
-    object.position.setFromCylindricalCoords(900, theta, y);
+    if (index % 2 === 0) {
+        object.position.setFromCylindricalCoords(900, theta, y);
+        object.lookAt(helixVector1);
+    } else {
+        object.position.setFromCylindricalCoords(900, theta, y);
+        object.lookAt(helixVector2);
+    }
 
-    helixVector.x = object.position.x * 2;
-    helixVector.y = object.position.y;
-    helixVector.z = object.position.z * 2;
-
-    object.lookAt(helixVector);
-
-    targets.helix.push(object);
+    targets.doubleHelix.push(object);
 }
+
 
 function addGridObject(index) {
 
     let object = new THREE.Object3D();
     object.position.x = ((index % 5) * 400) - 800;
-    object.position.y = (-(Math.floor(index / 5) % 5) * 400) + 800;
-    object.position.z = (Math.floor(index / 25)) * 1000 - 2000;
+    object.position.y = (-(Math.floor(index / 5) % 4) * 400) + 800;
+    object.position.z = (Math.floor(index / 20)) * 1000 - 2000;
     targets.grid.push(object);
 
 }
