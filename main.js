@@ -509,13 +509,13 @@ function initTrackbarControls() {
 function generateGeometricLayouts() {
 
     let sphereVector = new THREE.Vector3();
-    let helixVector1 = new THREE.Vector3();
-    let helixVector2 = new THREE.Vector3();
+    let helixVector = new THREE.Vector3();
+   
    
 
     for (let i = 0, l = targets.simple.length; i < l; i++) {
         addSphereObject(sphereVector, i, l);
-        addHelixObject(helixVector1, helixVector2,i);
+        addHelixObject(helixVector,i);
         addGridObject(i);
     }
 
@@ -536,24 +536,19 @@ function addSphereObject(sphereVector, index, length) {
     targets.sphere.push(object);
 }
 
-function addHelixObject(helixVector1, helixVector2, index) {
-    const theta = index * 0.175 * 2 + Math.PI; // Double the angle increment for double helix
-    const y = (index % 2 === 0 ? -1 : 1) * 8 * Math.floor(index / 4) + 450; // Adjusted y-coordinate calculation
+function addHelixObject(helixVector, index) {
 
+    const theta = index * 0.175 + Math.PI;
+    const y = -(index * 8) + 450;
     let object = new THREE.Object3D();
 
     object.position.setFromCylindricalCoords(900, theta, y);
 
-    const grooveWidth = 5; // Width of the groove
-    const distance = 10; // Distance between major and minor grooves
+    helixVector.x = object.position.x * 2;
+    helixVector.y = object.position.y;
+    helixVector.z = object.position.z * 2;
 
-    if (index % 4 < 2) { // Alternate between major and minor grooves
-        helixVector1.copy(object.position).add(new THREE.Vector3(0, grooveWidth / 2, 0));
-        object.lookAt(helixVector1);
-    } else {
-        helixVector2.copy(object.position).add(new THREE.Vector3(0, -grooveWidth / 2, distance));
-        object.lookAt(helixVector2);
-    }
+    object.lookAt(helixVector);
 
     targets.helix.push(object);
 }
