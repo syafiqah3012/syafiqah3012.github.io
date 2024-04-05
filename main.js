@@ -300,9 +300,9 @@ function addSphereObject(sphereVector, index, length) {
 }
 
 function addHelixObject(helixVector1, helixVector2, index) {
+    const theta = index * 0.175 * 2 + Math.PI; // Double the angle increment
+    const y = -(index * 8) + 450; // Same y-coordinate calculation
 
-    const theta = index * 0.175 + Math.PI;
-    const y = -(index * 8) + 450;
     let object = new THREE.Object3D();
 
     if (index % 2 === 0) {
@@ -315,6 +315,7 @@ function addHelixObject(helixVector1, helixVector2, index) {
 
     targets.helix.push(object);
 }
+
 
 
 function addGridObject(index) {
