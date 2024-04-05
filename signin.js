@@ -30,7 +30,6 @@ function handleCredentialResponse(response) {
     };
 
     localStorage.setItem("infos", JSON.stringify(userInfo));
-    showUserData();
     redirectToDataPage(); // Redirect to data.html page after successful sign-in
 }
 
