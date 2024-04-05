@@ -509,11 +509,13 @@ function initTrackbarControls() {
 function generateGeometricLayouts() {
 
     let sphereVector = new THREE.Vector3();
+    let helixVector1 = new THREE.Vector3();
+    let helixVector2 = new THREE.Vector3();
    
 
     for (let i = 0, l = targets.simple.length; i < l; i++) {
         addSphereObject(sphereVector, i, l);
-        addHelixObject(i);
+        addHelixObject(helixVector1, helixVector2,i);
         addGridObject(i);
     }
 
@@ -534,21 +536,25 @@ function addSphereObject(sphereVector, index, length) {
     targets.sphere.push(object);
 }
 
-function addHelixObject(index) {
-    const numTurns = 20; // Number of turns in the DNA helix
-    const radius = 200; // Radius of the helix
+function addHelixObject(helixVector1, helixVector2, index) {
+    const theta = index * 0.175 * 2 + Math.PI; // Double the angle increment for double helix
+    const y = (index % 2 === 0 ? -1 : 1) * 8 * Math.floor(index / 4) + 450; // Adjusted y-coordinate calculation
 
     let object = new THREE.Object3D();
-    const theta = index * 0.5 * Math.PI; // Angle increment
-    const y = (index % 2 === 0 ? -1 : 1) * radius * Math.sin(index / numTurns * 4 * Math.PI); // Adjusted y-coordinate calculation
-    const z = Math.floor(index / numTurns) * 200 - 1000; // Adjusted z-coordinate calculation
 
-    object.position.x = radius * Math.cos(theta);
-    object.position.y = y;
-    object.position.z = z;
+    object.position.setFromCylindricalCoords(900, theta, y);
+
+    if (index % 4 < 2) { // Alternate between major and minor grooves
+        majorGrooveVector.copy(object.position).multiplyScalar(2);
+        object.lookAt(helixVector1);
+    } else {
+        minorGrooveVector.copy(object.position).multiplyScalar(1.5); // Adjust scale for minor groove
+        object.lookAt(helixVector2);
+    }
 
     targets.helix.push(object);
 }
+
 
 
 
