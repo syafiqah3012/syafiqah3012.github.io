@@ -70,9 +70,5 @@ out.addEventListener("click", () => {
 });
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 04ad71d51a78d724e8801d7d5719e21982e891d3
-}
 
