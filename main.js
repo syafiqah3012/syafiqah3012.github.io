@@ -540,14 +540,16 @@ function addHelixObject(helixVector, index) {
     const theta = index * 0.175 + Math.PI;
     const y = -(index * 8) + 450;
 
-    // Create two objects for the double helix
+    // Create four objects for the DNA structure
     let object1 = new THREE.Object3D();
     let object2 = new THREE.Object3D();
+    let object3 = new THREE.Object3D();
+    let object4 = new THREE.Object3D();
 
     // Calculate positions for the double helix
     const radius = 400; // Radius of the helix
     const pitch = 20; // Distance between each turn of the helix
-    const separation = 30; // Distance between the two helices
+    const separation = 30; // Distance between the two strands of the DNA
 
     const xOffset = separation * Math.cos(theta);
     const zOffset = separation * Math.sin(theta);
@@ -566,18 +568,34 @@ function addHelixObject(helixVector, index) {
     object1.position.set(x1, y1, z1);
     object2.position.set(x2, y2, z2);
 
-    // Look at the helixVector for both objects
-    object1.lookAt(helixVector);
-    object2.lookAt(helixVector);
+    // Create the connectors between the two helix strands
+    const connectorHeight = 100;
+    const connectorRadius = 10;
 
-    // Push the helix objects to the targets.helix array
+    const connector1 = new THREE.Mesh(
+        new THREE.CylinderGeometry(connectorRadius, connectorRadius, connectorHeight, 32),
+        new THREE.MeshBasicMaterial({ color: 0xffffff })
+    );
+
+    const connector2 = connector1.clone();
+
+    // Position the connectors between the two helix strands
+    const connectorPosition1 = new THREE.Vector3((x1 + x2) / 2, y1 + connectorHeight / 2, (z1 + z2) / 2);
+    const connectorPosition2 = new THREE.Vector3((x1 + x2) / 2, y2 - connectorHeight / 2, (z1 + z2) / 2);
+
+    connector1.position.copy(connectorPosition1);
+    connector2.position.copy(connectorPosition2);
+
+    // Rotate the connectors to align with the helix strands
+    connector1.lookAt(object1.position);
+    connector2.lookAt(object2.position);
+
+    // Push the helix objects and connectors to the targets.helix array
     targets.helix.push(object1);
     targets.helix.push(object2);
+    scene.add(connector1);
+    scene.add(connector2);
 }
-
-
-
-
 
 
 
