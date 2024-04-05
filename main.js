@@ -509,12 +509,11 @@ function initTrackbarControls() {
 function generateGeometricLayouts() {
 
     let sphereVector = new THREE.Vector3();
-    let helixVector1 = new THREE.Vector3();
-    let helixVector2 = new THREE.Vector3();
+   
 
     for (let i = 0, l = targets.simple.length; i < l; i++) {
         addSphereObject(sphereVector, i, l);
-        addHelixObject(helixVector1, helixVector2, i);
+        addHelixObject(i);
         addGridObject(i);
     }
 
@@ -535,25 +534,22 @@ function addSphereObject(sphereVector, index, length) {
     targets.sphere.push(object);
 }
 
-function addHelixObject(helixVector1, helixVector2, index) {
-    const theta = index * 0.175 * 2 + Math.PI; // Double the angle increment
-
-    // Adjusted y-coordinate calculation for DNA-like shape
-    const helixHeight = 40; // Adjust this value to control the height of the helix
-    const y = (index % 2 === 0 ? -1 : 1) * helixHeight * Math.floor(index / 4) + 450;
+function addHelixObject(index) {
+    const numTurns = 20; // Number of turns in the DNA helix
+    const radius = 200; // Radius of the helix
 
     let object = new THREE.Object3D();
+    const theta = index * 0.5 * Math.PI; // Angle increment
+    const y = (index % 2 === 0 ? -1 : 1) * radius * Math.sin(index / numTurns * 4 * Math.PI); // Adjusted y-coordinate calculation
+    const z = Math.floor(index / numTurns) * 200 - 1000; // Adjusted z-coordinate calculation
 
-    object.position.setFromCylindricalCoords(900, theta, y);
-
-    if (index % 4 < 2) { // Alternate between the two helix vectors
-        object.lookAt(helixVector1);
-    } else {
-        object.lookAt(helixVector2);
-    }
+    object.position.x = radius * Math.cos(theta);
+    object.position.y = y;
+    object.position.z = z;
 
     targets.helix.push(object);
 }
+
 
 
 
