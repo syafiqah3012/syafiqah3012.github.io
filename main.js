@@ -516,7 +516,7 @@ function generateGeometricLayouts() {
 
     for (let i = 0, l = targets.simple.length; i < l; i++) {
         addSphereObject(sphereVector, i, l);
-        addHelixObject(helixVector1, helixVector2, i);
+        addHelixObjects(helixVector1, helixVector2, i);
         addGridObject(i);
     }
 
