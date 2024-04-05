@@ -14,30 +14,6 @@ function redirectToDataPage() {
     window.location.href = 'data.html';
 }
 
-// Show All Data in Web from localStorage
-function showUserData() {
-    console.log("Showing user data...");
-    if (localStorage.getItem("infos")) {
-        let userInfo = JSON.parse(localStorage.getItem("infos"));
-
-        info.classList.remove("d-none");
-        sign.classList.add("d-none");
-        out.classList.remove("d-none");
-
-        fullname.textContent = userInfo.fullnameL;
-        photo.src = userInfo.photo_linkL;
-        first.textContent = userInfo.firstL;
-        last.textContent = userInfo.lastL;
-        mail.textContent = userInfo.mailL;
-        id_num.textContent = userInfo.id_numL;
-    } else {
-        info.classList.add("d-none");
-        sign.classList.remove("d-none");
-        out.classList.add("d-none");
-    }
-}
-
-window.addEventListener("load", showUserData());
 
 // Function to handle sign-in response
 function handleCredentialResponse(response) {
