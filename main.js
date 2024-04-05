@@ -537,21 +537,44 @@ function addSphereObject(sphereVector, index, length) {
 }
 
 function addHelixObject(helixVector, index) {
-
     const theta = index * 0.175 + Math.PI;
     const y = -(index * 8) + 450;
-    let object = new THREE.Object3D();
 
-    object.position.setFromCylindricalCoords(900, theta, y);
+    // Create two objects for the double helix
+    let object1 = new THREE.Object3D();
+    let object2 = new THREE.Object3D();
 
-    helixVector.x = object.position.x * 2;
-    helixVector.y = object.position.y;
-    helixVector.z = object.position.z * 2;
+    // Calculate positions for the double helix
+    const radius = 400; // Radius of the helix
+    const pitch = 20; // Distance between each turn of the helix
+    const separation = 30; // Distance between the two helices
 
-    object.lookAt(helixVector);
+    const xOffset = separation * Math.cos(theta);
+    const zOffset = separation * Math.sin(theta);
 
-    targets.helix.push(object);
+    // Calculate positions for the first helix
+    const x1 = radius * Math.cos(theta);
+    const z1 = radius * Math.sin(theta);
+    const y1 = y;
+
+    // Calculate positions for the second helix, offset by the separation
+    const x2 = x1 + xOffset;
+    const z2 = z1 + zOffset;
+    const y2 = y;
+
+    // Set positions for the two helix objects
+    object1.position.set(x1, y1, z1);
+    object2.position.set(x2, y2, z2);
+
+    // Look at the helixVector for both objects
+    object1.lookAt(helixVector);
+    object2.lookAt(helixVector);
+
+    // Push the helix objects to the targets.helix array
+    targets.helix.push(object1);
+    targets.helix.push(object2);
 }
+
 
 
 
