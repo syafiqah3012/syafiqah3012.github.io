@@ -1,6 +1,6 @@
 // Replace these values with your own
 const SPREADSHEET_ID = '1fcldAYsE92IPwbhfAQs1PMVcHW8WNM_r2L4CkoKrJD0';
-const API_KEY = 'AIzaSyAJAsXg_eX9n5-fQTbc-jsncUAmHoOfvCE';
+const API_KEY = 'AIzaSyASJjHzEBw1vMefkDJ72y0OnOMm2BRijYU';
 
 let camera, scene, renderer, controls, composer;
 var hblur, vblur;
