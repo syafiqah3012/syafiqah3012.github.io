@@ -544,20 +544,19 @@ function addHelixObject(helixVector1, helixVector2, index) {
 
     object.position.setFromCylindricalCoords(900, theta, y);
 
-    const scaleFactor = 1.0001; // Adjust scale factor as needed to bring helixVector1 and helixVector2 extremely closer
+    const distance = 0.1; // Adjust this distance to bring helixVector1 and helixVector2 extremely close
 
     if (index % 4 < 2) { // Alternate between major and minor grooves
-        helixVector1.copy(object.position).multiplyScalar(scaleFactor);
-        helixVector2.copy(helixVector1).multiplyScalar(1.00001); // Adjusted to be extremely closer to helixVector1
+        helixVector1.copy(object.position).add(new THREE.Vector3(distance, 0, 0));
         object.lookAt(helixVector1);
     } else {
-        helixVector2.copy(object.position).multiplyScalar(scaleFactor); // Adjust scale for minor groove
-        helixVector1.copy(helixVector2).multiplyScalar(0.99999); // Adjusted to be extremely closer from helixVector2
+        helixVector2.copy(object.position).add(new THREE.Vector3(-distance, 0, 0));
         object.lookAt(helixVector2);
     }
 
     targets.helix.push(object);
 }
+
 
 
 
