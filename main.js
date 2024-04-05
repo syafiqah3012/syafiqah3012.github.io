@@ -537,35 +537,39 @@ function addSphereObject(sphereVector, index, length) {
     targets.sphere.push(object);
 }
 
-function addHelixObject(helixVector1, helixVector2, index) {
-    const theta = index * 0.175 + Math.PI;
-    const y = -(index * 8) + 450;
+function addHelixObjects() {
+    const numObjectsPerHelix = 50; // Number of objects per helix
+    const helixSeparationDistance = 1000; // Separation distance between helixes
 
-    let object = new THREE.Object3D();
+    for (let i = 0; i < numObjectsPerHelix; i++) {
+        // First helix
+        const theta1 = i * 0.175 + Math.PI;
+        const y1 = -(i * 8) + 450;
+        let object1 = new THREE.Object3D();
+        object1.position.setFromCylindricalCoords(900, theta1, y1);
 
-    // Calculate positions for the two helices
-    const radius = 900;
-    const twist = 3; // Adjust twist factor as needed
-    const height = 150; // Adjust height between the helices as needed
+        // Second helix
+        const theta2 = theta1 + Math.PI; // Shift the angle for the second helix
+        const y2 = y1; // Keep the same y-coordinate
+        let object2 = new THREE.Object3D();
+        object2.position.setFromCylindricalCoords(900, theta2, y2);
 
-    const x1 = radius * Math.cos(theta);
-    const z1 = radius * Math.sin(theta) + height / 2 * Math.sin(theta * twist);
+        // Adjust the position of the second helix to separate it from the first one
+        object2.position.x += helixSeparationDistance;
 
-    const x2 = radius * Math.cos(theta);
-    const z2 = radius * Math.sin(theta) - height / 2 * Math.sin(theta * twist);
+        // Determine the vector for looking at the center
+        let helixVector = new THREE.Vector3(0, 0, 0);
 
-    // Set object positions for the two helices
-    object.position.set(x1, y, z1);
-    helixVector1.set(x1 * 2, y, z1 * 2);
-    object.lookAt(helixVector1);
-    targets.helix.push(object);
+        // Set the lookAt direction for both helixes
+        object1.lookAt(helixVector);
+        object2.lookAt(helixVector);
 
-    let object2 = new THREE.Object3D();
-    object2.position.set(x2, y, z2);
-    helixVector2.set(x2 * 2, y, z2 * 2);
-    object2.lookAt(helixVector2);
-    targets.helix.push(object2);
+        // Push objects into respective targets
+        targets.helix.push(object1);
+        targets.helix.push(object2);
+    }
 }
+
 
 
 function addGridObject(index) {
