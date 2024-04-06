@@ -30,6 +30,7 @@ function init() {
         return response.json();
     })
     .then(data => {
+        console.log(data);
         if (data && data.values) {
             const tableData = data.values; 
             initObjects(tableData); 
