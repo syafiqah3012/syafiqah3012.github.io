@@ -104,20 +104,13 @@ function simpleObjectsLayout(tableData) {
 
     const numColumns = 20;
     const numRows = 10;
-    const objectWidth = 240; // Width of each object
-    const objectHeight = 300; // Height of each object
 
     for (let i = 0; i < tableData.length; i += 5) {
         let object = new THREE.CSS3DObject(htmlElement(tableData, i));
         const col = i / 5 % numColumns;
         const row = Math.floor(i / 5 / numColumns);
-        
-        // Calculate the position based on column and row
-        const x = col * objectWidth; 
-        const y = -row * objectHeight;
-
-        object.position.x = x;
-        object.position.y = y;
+        object.position.x = (col * 140) - (numColumns * 140) / 2 + 70; 
+        object.position.y = -(row * 180) + (numRows * 180) / 2 - 90; 
         object.position.z = Math.random() * 4000 - 2000;
 
         scene.add(object);
@@ -125,6 +118,8 @@ function simpleObjectsLayout(tableData) {
         tableLayout(tableData, i, col, row);
     }
 }
+
+
 
 
 function htmlElement(tableData, i) {
@@ -198,21 +193,11 @@ function elementClickHandler(i){
 }
 
 function tableLayout(table, index, col, row) {
-    const objectWidth = 240; 
-    const objectHeight = 300; 
-    const numColumns = 20; 
+    let object = new THREE.Object3D();
 
-    const x = (index % numColumns) * objectWidth;
-    const y = -Math.floor(index / numColumns) * objectHeight;
-
-    // Check if the targets.table array has the element at the specified index
-    if (targets.table.length > index) {
-        // Adjust the existing object position
-        targets.table[index].position.x = x;
-        targets.table[index].position.y = y;
-    } else {
-        console.error('Error: targets.table does not have the element at index', index);
-    }
+    object.position.x = (col * 140) - 1330;
+    object.position.y = -(row * 180) + 990;
+    targets.table.push(object);
 }
 
 
