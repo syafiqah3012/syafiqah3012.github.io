@@ -106,34 +106,20 @@ function simpleObjectsLayout(tableData) {
 
     const numColumns = 20;
     const numRows = 10;
-   /* const columnSpacing = 150; // Initial spacing between columns
-    const rowSpacing = 200; // Initial spacing between rows
-    const minSpacing = 200; // Minimum spacing to prevent overlap
-    const numObjects = tableData.length;
-    const totalWidth = numColumns * columnSpacing;
-    const totalHeight = numRows * rowSpacing;*/
-    
-    // Calculate dynamic spacing to fit within the layout area without overlap
-   /* const adjustedColumnSpacing = Math.min(columnSpacing, totalWidth / numColumns - minSpacing);
-    const adjustedRowSpacing = Math.min(rowSpacing, totalHeight / numRows - minSpacing);*/
 
-    for (let i = 0; i < numObjects; i++) {
+    for (let i = 0; i < tableData.length; i++) {
         let object = new THREE.CSS3DObject(htmlElement(tableData, i));
-        
-        // Calculate column and row based on the index
-        const col = i % numColumns;
-        const row = Math.floor(i / numColumns);
-
-        // Calculate position based on column and row
-        object.position.x = (col * adjustedColumnSpacing) - (totalWidth / 2) + (adjustedColumnSpacing / 2); 
-        object.position.y = -(row * adjustedRowSpacing) + (totalHeight / 2) - (adjustedRowSpacing / 2); 
+        const col = i / 5 % numColumns;
+        const row = Math.floor(i / 5 / numColumns);
+        object.position.x = (col * 140) - (numColumns * 140) / 2 + 70; 
+        object.position.y = -(row * 180) + (numRows * 180) / 2 - 90; 
         object.position.z = Math.random() * 4000 - 2000;
 
         scene.add(object);
         targets.simple.push(object);
         tableLayout(tableData, i, col, row);
     }
-}
+} 
 
 
 // Define the htmlElement function
