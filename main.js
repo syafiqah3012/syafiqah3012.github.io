@@ -16,7 +16,7 @@ function init() {
 
     initScene();
 
-    initObjects();
+   // initObjects();
 
     addClickListeners();
 
