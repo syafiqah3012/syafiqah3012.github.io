@@ -1,4 +1,4 @@
-// Google Sheets API
+
 const apiKey = 'AIzaSyBu5Cbjy0Bu-y6P7dVAjOy1eWdrhxVEUN4';
 const sheetId = '1fcldAYsE92IPwbhfAQs1PMVcHW8WNM_r2L4CkoKrJD0';
 const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/A2:F201?key=${apiKey}`;
@@ -15,8 +15,6 @@ function init() {
     initCamera();
 
     initScene();
-
-   // initObjects();
 
     addClickListeners();
 
@@ -82,7 +80,6 @@ function initObjects(tableData) {
         simpleObjectsLayout(tableData);
         generateGeometricLayouts();
     } else {
-        // If tableData is not provided, log an error message
         console.error('No table data provided.');
     }
 
@@ -116,8 +113,8 @@ function simpleObjectsLayout(tableData) {
         const row = Math.floor(i / numColumns);
 
         // Calculate position based on column and row
-        object.position.x = (col * 150) - 1330; // Assuming fixed spacing between columns
-        object.position.y = -(row * 200) + 990; // Assuming fixed spacing between rows
+        object.position.x = (col * 150) - 1330; 
+        object.position.y = -(row * 200) + 990; 
         object.position.z = Math.random() * 4000 - 2000;
 
         // Add click event listener
@@ -128,7 +125,6 @@ function simpleObjectsLayout(tableData) {
         tableLayout(tableData, i, col, row);
     }
 }
-
 
 
 // Define the htmlElement function
@@ -269,8 +265,8 @@ function addSphereObject(sphereVector, index, length) {
 }
 
 function addHelixObjects() {
-    const numObjectsPerHelix = 50; // Number of objects per helix
-    const helixSeparationDistance = 1000; // Separation distance between helixes
+    const numObjectsPerHelix = 50; 
+    const helixSeparationDistance = 1000; 
 
     for (let i = 0; i < numObjectsPerHelix; i++) {
         // First helix
@@ -280,8 +276,8 @@ function addHelixObjects() {
         object1.position.setFromCylindricalCoords(900, theta1, y1);
 
         // Second helix
-        const theta2 = theta1 + Math.PI; // Shift the angle for the second helix
-        const y2 = y1; // Keep the same y-coordinate
+        const theta2 = theta1 + Math.PI; 
+        const y2 = y1; 
         let object2 = new THREE.Object3D();
         object2.position.setFromCylindricalCoords(900, theta2, y2);
 

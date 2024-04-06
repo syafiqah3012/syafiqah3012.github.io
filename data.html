@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>55 Employee Data Visualization</title>
+    <title>Data Visualization</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
@@ -43,36 +43,36 @@
         }
 
         .element .photo {
-    width: 70px; 
-    height: 50px; /* Reduce the height of the photo */
-    margin-top: 35px; /* Adjust the margin to center the smaller photo vertically */
-    border-radius: 0%; /* Keep the photo rounded */
-}
+          width: 70px; 
+          height: 50px; 
+          margin-top: 35px; 
+          border-radius: 0%; 
+        }
 
-.element .details {
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-    color: rgba(127, 255, 255, 0.75);
-    text-align: center; /* Align text to center */
-    padding: 0 10px; /* Add padding to details */
-    font-size: 12px;
-    font-weight: bold; /* Set the text to bold */
-}
+        .element .details {
+         position: absolute;
+         bottom: 10px;
+         left: 0;
+         right: 0;
+         color: rgba(127, 255, 255, 0.75);
+         text-align: center; 
+         padding: 0 10px; 
+         font-size: 12px;
+         font-weight: bold; 
+        }
 
-.element .name {
+        .element .name {
 
-    position: absolute;
-    left: 0;
-    right: 0;
-    color: rgb(252, 252, 252);
-    text-align: center; /* Align text to center */
-    padding: 0 10px; /* Add padding to details */
-    font-size: 15px;
-    font-weight: bold; /* Set the text to bold */
+         position: absolute;
+         left: 0;
+         right: 0;
+         color: rgb(252, 252, 252);
+         text-align: center; 
+         padding: 0 10px; 
+         font-size: 15px;
+         font-weight: bold; 
 
-}
+        }
 
         #menu {
             position: absolute;
@@ -107,9 +107,7 @@
 <script src="./lib/controls/TrackballControls.js"></script>
 <script src="./lib/renderers/CSS3DRenderer.js"></script>
 
-<div id="container">
-    <!-- Employee data will be dynamically generated here -->
-</div>
+<div id="container"></div>
 
 <div id="menu">
     <button id="table">TABLE</button>
