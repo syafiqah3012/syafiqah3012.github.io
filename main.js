@@ -16,7 +16,7 @@ function init() {
 
     initScene();
 
-    initObjects(tableData);
+    initObjects();
 
     addClickListeners();
 
