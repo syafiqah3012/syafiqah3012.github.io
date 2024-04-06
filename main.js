@@ -1,7 +1,7 @@
 // Google Sheets API
 const apiKey = 'AIzaSyBu5Cbjy0Bu-y6P7dVAjOy1eWdrhxVEUN4';
 const sheetId = '1fcldAYsE92IPwbhfAQs1PMVcHW8WNM_r2L4CkoKrJD0';
-const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/A1:E27?key=${apiKey}`;
+const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/A2:F201?key=${apiKey}`;
 
 let camera, scene, renderer, controls, composer;
 var hblur, vblur;
@@ -23,21 +23,27 @@ function init() {
     initRenderer();
 
     fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            if (data && data.values) {
-                const tableData = data.values.flat(); // Flatten the 2D array
-                initObjects(tableData);
-                addClickListeners();
-                transform(targets.table, 2000);
-                window.addEventListener('resize', onWindowResize, false);
-            } else {
-                console.error('Error: Data values are missing or invalid.');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data && data.values) {
+            const tableData = data.values; // No need to flatten the array
+            initObjects(tableData);
+            addClickListeners();
+            transform(targets.table, 2000);
+            window.addEventListener('resize', onWindowResize, false);
+            console.log('Successfully loaded data.');
+        } else {
+            console.error('Error: Data values are missing or invalid.');
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
 
     initTrackbarControls();
 
