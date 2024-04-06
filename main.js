@@ -16,7 +16,7 @@ function init() {
 
     initScene();
 
-    initObjects();
+    initObjects(tableData);
 
     addClickListeners();
 
@@ -76,7 +76,14 @@ function initRenderer() {
 function initObjects(tableData) {
 
     simpleObjectsLayout(tableData);
-    generateGeometricLayouts();
+     // Check if tableData is provided
+     if (tableData) {
+        simpleObjectsLayout(tableData);
+        generateGeometricLayouts();
+    } else {
+        // If tableData is not provided, log an error message
+        console.error('No table data provided.');
+    }
 
 }
 
