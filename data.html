@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>41 Employee Data Visualization</title>
+    <title>42 Employee Data Visualization</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
@@ -17,21 +17,25 @@
         }
 
         #container {
-            position: absolute;
-            top: 0;
-            bottom: 40px;
-            width: 100%;
-            overflow-y: scroll;
-        }
+    position: absolute;
+    top: 0;
+    bottom: 40px;
+    width: 80%; /* Increase the width to 80% */
+    height: 80%; /* Increase the height to 80% */
+    overflow-y: scroll;
+}
+
 
         .element {
-            width: 120px;
-            height: 160px;
+            width: 200px; /* Increased width to accommodate the content */
+            height: 200px; /* Increased height to accommodate the content */
             box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
             border: 1px solid rgba(127, 255, 255, 0.25);
             text-align: center;
-            cursor: default;
-
+            cursor: pointer;
+            margin: 10px; /* Add margin between elements */
+            float: left; /* Float elements to arrange them horizontally */
+            position: relative; /* Positioning for details */
         }
 
         .element:hover {
@@ -41,8 +45,8 @@
         }
 
         .element .photo {
-    width: 40px; /* Reduce the width of the photo */
-    height: 40px; /* Reduce the height of the photo */
+    width: 150px; /* Reduce the width of the photo */
+    height: 150px; /* Reduce the height of the photo */
     margin-top: 40px; /* Adjust the margin to center the smaller photo vertically */
     border-radius: 0%; /* Keep the photo rounded */
 }
