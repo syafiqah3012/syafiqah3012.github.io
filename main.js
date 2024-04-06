@@ -216,12 +216,18 @@ function elementClickHandler(i){
 }
 
 function tableLayout(table, index, col, row) {
+    const columnSpacing = 140; // Adjust spacing between columns
+    const rowSpacing = 180; // Adjust spacing between rows
+
     let object = new THREE.Object3D();
 
-    object.position.x = (col * 140) - 1330;
-    object.position.y = -(row * 180) + 990;
+    // Calculate position based on column and row, adjusting spacing
+    object.position.x = (col * columnSpacing) - (columnSpacing * table.numColumns) / 2 + columnSpacing / 2;
+    object.position.y = -(row * rowSpacing) + (rowSpacing * table.numRows) / 2 - rowSpacing / 2;
+
     targets.table.push(object);
 }
+
 
 
 function addClickListener(target, elementId) {
