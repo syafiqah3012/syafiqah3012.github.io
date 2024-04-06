@@ -1,65 +1,84 @@
-// Replace these values with your own
-const SPREADSHEET_ID = '1fcldAYsE92IPwbhfAQs1PMVcHW8WNM_r2L4CkoKrJD0';
-const API_KEY = 'AIzaSyASJjHzEBw1vMefkDJ72y0OnOMm2BRijYU';
+// Google Sheets API
+const apiKey = 'AIzaSyASJjHzEBw1vMefkDJ72y0OnOMm2BRijYU';
+const sheetId = '1fcldAYsE92IPwbhfAQs1PMVcHW8WNM_r2L4CkoKrJD0';
+const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/A1:E27?key=${apiKey}`;
 
 let camera, scene, renderer, controls, composer;
 var hblur, vblur;
 let targets = {simple: [], table: [], sphere: [], helix: [], grid: []};
 
-async function fetchDataFromGoogleSheet() {
-    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/Sheet1!A1:E30?key=${API_KEY}`);
-    const data = await response.json();
-    return data.values;
-}
+init();
+animate();
 
-// Now, you can use the fetched data to populate your table variable
-async function init() {
-    const sheetData = await fetchDataFromGoogleSheet();
-    if (sheetData) {
-        // Assuming your Google Sheet has the same structure as your array,
-        // you can directly assign the fetched data to the table variable
-        table = sheetData;
-        initCamera();
-        initScene();
-        initObjects();
+function init() {
+
+    initCamera();
+
+    initScene();
+
+    initObjects();
+
+    addClickListeners();
+
+    initRenderer();
+
+    fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+        const tableData = data.values.flat(); // Flatten the 2D array
+        initObjects(tableData);
         addClickListeners();
-        initRenderer();
-        initTrackbarControls();
         transform(targets.table, 2000);
         window.addEventListener('resize', onWindowResize, false);
-    } else {
-        console.error('Failed to fetch data from Google Sheet');
-    }
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+
+    initTrackbarControls();
+
+    transform(targets.table, 2000);
+
+    window.addEventListener('resize', onWindowResize, false);
+
+
+
 }
 
-// Call the init function to fetch data and initialize your scene
-init();
-
 function initCamera() {
+
     camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000);
     camera.position.z = 3000;
+
 }
 
 function initScene() {
+
     scene = new THREE.Scene();
+
 }
 
 function initRenderer() {
+
     renderer = new THREE.CSS3DRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById('container').appendChild(renderer.domElement);
 }
 
 function initObjects() {
+
     simpleObjectsLayout();
     generateGeometricLayouts();
+
 }
 
 function addClickListeners() {
+
     addClickListener(targets.table, 'table');
     addClickListener(targets.sphere, 'sphere');
     addClickListener(targets.helix, 'helix');
     addClickListener(targets.grid, 'grid');
+
 }
 
 function simpleObjectsLayout() {
@@ -80,27 +99,28 @@ function simpleObjectsLayout() {
     }
 }
 
-function htmlElement(table, i) {
+function htmlElement(tableData, i) {
     let element = document.createElement('div');
     element.className = 'element';
     element.style.backgroundColor = 'rgba(0,127,127,' + (Math.random() * 0.5 + 0.25) + ')';
 
-    let number = document.createElement('div');
-    number.className = 'number';
-    number.textContent = (i / 5) + 1;
-    element.appendChild(number);
+    let name = document.createElement('div');
+    name.className = 'name';
+    name.textContent = tableData[i];
+    element.appendChild(name);
 
-    let symbol = document.createElement('div');
-    symbol.className = 'symbol';
-    symbol.textContent = table[i];
-    element.appendChild(symbol);
+    let image = document.createElement('img');
+    image.src = tableData[i + 1]; // Assuming the photo link is in the second position in each row
+    // You may need to adjust this index based on your actual data structure
+    image.style.maxWidth = '100%'; // Ensure the image fits in the container
+    element.appendChild(image);
 
     let details = document.createElement('div');
     details.className = 'details';
-    details.innerHTML = table[i + 1] + '<br>' + table[i + 2];
+    details.innerHTML = `Age: ${tableData[i + 2]}<br>Country: ${tableData[i + 3]}<br>Interest: ${tableData[i + 4]}<br>Net Worth: ${tableData[i + 5]}`;
     element.appendChild(details);
 
-    element.addEventListener('click', ()=>elementClickHandler(i), false);
+    element.addEventListener('click', () => elementClickHandler(i), false);
 
     return element;
 }
@@ -133,11 +153,13 @@ function tableLayout(table, index, col, row) {
 }
 
 function addClickListener(target, elementId) {
+
     const button = document.getElementById(elementId);
 
     button.addEventListener('click', function () {
         transform(target, 2000);
     }, false);
+
 }
 
 function initTrackbarControls() {
@@ -149,18 +171,23 @@ function initTrackbarControls() {
 }
 
 function generateGeometricLayouts() {
+
     let sphereVector = new THREE.Vector3();
     let helixVector1 = new THREE.Vector3();
     let helixVector2 = new THREE.Vector3();
    
+   
+
     for (let i = 0, l = targets.simple.length; i < l; i++) {
         addSphereObject(sphereVector, i, l);
         addHelixObjects(helixVector1, helixVector2, i);
         addGridObject(i);
     }
+
 }
 
 function addSphereObject(sphereVector, index, length) {
+
     const phi = Math.acos(-1 + (2 * index) / length);
     const theta = Math.sqrt(length * Math.PI) * phi;
     let object = new THREE.Object3D();
@@ -207,15 +234,20 @@ function addHelixObjects() {
     }
 }
 
+
+
 function addGridObject(index) {
+
     let object = new THREE.Object3D();
     object.position.x = ((index % 5) * 400) - 800;
     object.position.y = (-(Math.floor(index / 5) % 4) * 400) + 800;
     object.position.z = (Math.floor(index / 20)) * 1000 - 2000;
     targets.grid.push(object);
+
 }
 
 function transform(target, duration) {
+
     TWEEN.removeAll();
 
     for (let i = 0; i < targets.simple.length; i++) {
@@ -229,9 +261,11 @@ function transform(target, duration) {
         .to({}, duration * 2)
         .onUpdate(render)
         .start();
+
 }
 
 function transformObjectPosition(object, targetObject, duration) {
+
     new TWEEN.Tween(object.position)
         .to({
             x: targetObject.position.x,
@@ -240,9 +274,11 @@ function transformObjectPosition(object, targetObject, duration) {
         }, Math.random() * duration + duration)
         .easing(TWEEN.Easing.Exponential.InOut)
         .start();
+
 }
 
 function transformObjectRotation(object, targetObject, duration) {
+
     new TWEEN.Tween(object.rotation)
         .to({
             x: targetObject.rotation.x,
@@ -251,25 +287,28 @@ function transformObjectRotation(object, targetObject, duration) {
         }, Math.random() * duration + duration)
         .easing(TWEEN.Easing.Exponential.InOut)
         .start();
+
 }
 
 function onWindowResize() {
+
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     render();
+
 }
 
 function render() {
+
     renderer.render(scene, camera);
+
 }
 
 function animate() {
+
     requestAnimationFrame(animate);
     TWEEN.update();
     controls.update();
     composer.render();
 }
-
-// Start the animation loop
-animate();
