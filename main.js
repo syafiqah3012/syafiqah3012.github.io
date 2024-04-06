@@ -132,7 +132,8 @@ function htmlElement(tableData, i) {
 
     let image = document.createElement('img');
     image.src = tableData[i][1]; // Photo is in the second column (B)
-    image.style.maxWidth = '100%'; // Ensure the image fits in the container
+   // image.style.maxWidth = '100%'; // Ensure the image fits in the container
+    image.className = 'photo'; // Apply the 'photo' class for styling
     element.appendChild(image);
 
     let details = document.createElement('div');
