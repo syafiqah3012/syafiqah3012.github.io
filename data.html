@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>41</title>
+    <title>Employee Data Visualization</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
@@ -12,29 +12,28 @@
         body {
             background-color: #000000;
             margin: 0;
-            font-family: Helvetica, sans-serif;;
+            font-family: Helvetica, sans-serif;
             overflow: hidden;
         }
 
-        a {
-            color: #ffffff;
-        }
-
-        #menu {
+        #container {
             position: absolute;
-            bottom: 20px;
+            top: 0;
+            bottom: 40px; /* Adjusted to accommodate the menu */
             width: 100%;
-            text-align: center;
+            overflow-y: scroll; /* Enable scrolling if content exceeds viewport */
         }
 
         .element {
-            width: 120px;
-            height: 160px;
+            width: 180px; /* Increased width to accommodate photo */
+            height: 240px; /* Increased height to accommodate photo and details */
             box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
             border: 1px solid rgba(127, 255, 255, 0.25);
             text-align: center;
             cursor: default;
-
+            margin: 10px; /* Add margin between elements */
+            float: left; /* Float elements to arrange them horizontally */
+            position: relative; /* Positioning for details */
         }
 
         .element:hover {
@@ -43,32 +42,28 @@
             backdrop-filter: blur(16px);
         }
 
-        .element .number {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 12px;
-            color: rgba(127, 255, 255, 0.75);
-        }
-
-        .element .symbol {
-            position: absolute;
-            top: 40px;
-            left: 0px;
-            right: 0px;
-            font-size: 60px;
-            font-weight: bold;
-            color: rgba(255, 255, 255, 0.75);
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.95);
+        .element .photo {
+            width: 120px; /* Size of the photo */
+            height: 120px; /* Size of the photo */
+            margin-top: 20px; /* Adjusted margin to center photo vertically */
+            border-radius: 50%; /* Rounded photo */
         }
 
         .element .details {
             position: absolute;
             bottom: 15px;
-            left: 0px;
-            right: 0px;
-            font-size: 12px;
+            left: 0;
+            right: 0;
             color: rgba(127, 255, 255, 0.75);
+            text-align: left; /* Align text to left */
+            padding: 0 10px; /* Add padding to details */
+        }
+
+        #menu {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
         }
 
         button {
@@ -97,8 +92,9 @@
 <script src="./lib/controls/TrackballControls.js"></script>
 <script src="./lib/renderers/CSS3DRenderer.js"></script>
 
-<div id="container"></div>
-
+<div id="container">
+    <!-- Employee data will be dynamically generated here -->
+</div>
 
 <div id="menu">
     <button id="table">TABLE</button>
@@ -106,6 +102,7 @@
     <button id="helix">HELIX</button>
     <button id="grid">GRID</button>
 </div>
+
 <script src="./main.js"></script>
 </body>
 </html>

@@ -51,8 +51,6 @@ function init() {
 
     window.addEventListener('resize', onWindowResize, false);
 
-
-
 }
 
 function initCamera() {
@@ -109,31 +107,35 @@ function simpleObjectsLayout(tableData) {
     }
 }
 
-function htmlElement(table, i) {
+function htmlElement(tableData, i) {
     let element = document.createElement('div');
     element.className = 'element';
     element.style.backgroundColor = 'rgba(0,127,127,' + (Math.random() * 0.5 + 0.25) + ')';
 
     let name = document.createElement('div');
     name.className = 'name';
-    name.textContent = table[i];
+    name.textContent = tableData[i];
     element.appendChild(name);
 
     let image = document.createElement('img');
-    image.src = table[i + 1]; // Assuming the photo link is in the second position in each row
+    image.src = tableData[i + 1]; // Assuming the photo link is in the second position in each row
     // You may need to adjust this index based on your actual data structure
     image.style.maxWidth = '100%'; // Ensure the image fits in the container
     element.appendChild(image);
 
     let details = document.createElement('div');
     details.className = 'details';
-    details.innerHTML = `Age: ${table[i + 2]}<br>Country: ${table[i + 3]}<br>Interest: ${table[i + 4]}<br>Net Worth: ${table[i + 5]}`;
+    details.innerHTML = `Age: ${tableData[i + 2]}<br>Country: ${tableData[i + 3]}<br>Interest: ${tableData[i + 4]}<br>Net Worth: ${tableData[i + 5]}`;
     element.appendChild(details);
 
-    element.addEventListener('click', () => elementClickHandler(i), false);
+    // Use an IIFE to create a closure around the current value of i
+    (function(index) {
+        element.addEventListener('click', () => elementClickHandler(index), false);
+    })(i);
 
     return element;
 }
+
 
 function elementClickHandler(i){
 
