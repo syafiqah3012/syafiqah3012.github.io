@@ -75,7 +75,7 @@ function initRenderer() {
     document.getElementById('container').appendChild(renderer.domElement);
 }
 
-function initObjects() {
+function initObjects(tableData) {
 
     simpleObjectsLayout(tableData);
     generateGeometricLayouts();
