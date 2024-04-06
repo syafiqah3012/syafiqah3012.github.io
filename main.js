@@ -31,8 +31,8 @@ function init() {
     })
     .then(data => {
         if (data && data.values) {
-            const tableData = data.values; // No need to flatten the array
-            initObjects(tableData);
+            const table = data.values; // No need to flatten the array
+            initObjects(table);
             addClickListeners();
             transform(targets.table, 2000);
             window.addEventListener('resize', onWindowResize, false);
@@ -95,7 +95,7 @@ function simpleObjectsLayout() {
     const numColumns = 20;
     const numRows = 10;
 
-    for (let i = 0; i < tableData.length; i += 5) {
+    for (let i = 0; i < table.length; i += 5) {
         let object = new THREE.CSS3DObject(htmlElement(table, i));
         const col = i / 5 % numColumns;
         const row = Math.floor(i / 5 / numColumns);
@@ -109,25 +109,25 @@ function simpleObjectsLayout() {
     }
 }
 
-function htmlElement(tableData, i) {
+function htmlElement(table, i) {
     let element = document.createElement('div');
     element.className = 'element';
     element.style.backgroundColor = 'rgba(0,127,127,' + (Math.random() * 0.5 + 0.25) + ')';
 
     let name = document.createElement('div');
     name.className = 'name';
-    name.textContent = tableData[i];
+    name.textContent = table[i];
     element.appendChild(name);
 
     let image = document.createElement('img');
-    image.src = tableData[i + 1]; // Assuming the photo link is in the second position in each row
+    image.src = table[i + 1]; // Assuming the photo link is in the second position in each row
     // You may need to adjust this index based on your actual data structure
     image.style.maxWidth = '100%'; // Ensure the image fits in the container
     element.appendChild(image);
 
     let details = document.createElement('div');
     details.className = 'details';
-    details.innerHTML = `Age: ${tableData[i + 2]}<br>Country: ${tableData[i + 3]}<br>Interest: ${tableData[i + 4]}<br>Net Worth: ${tableData[i + 5]}`;
+    details.innerHTML = `Age: ${table[i + 2]}<br>Country: ${table[i + 3]}<br>Interest: ${table[i + 4]}<br>Net Worth: ${table[i + 5]}`;
     element.appendChild(details);
 
     element.addEventListener('click', () => elementClickHandler(i), false);
