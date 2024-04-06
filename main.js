@@ -116,9 +116,9 @@ function simpleObjectsLayout(tableData) {
         const col = i % numColumns;
         const row = Math.floor(i / numColumns);
 
-        // Calculate position based on column and row
-        object.position.x = (col * columnSpacing) - (numColumns * columnSpacing) / 2 + columnSpacing / 2; 
-        object.position.y = -(row * rowSpacing) + (numRows * rowSpacing) / 2 - rowSpacing / 2; 
+        // Calculate position based on column and row, adding additional offsets to prevent overlap
+        object.position.x = (col * columnSpacing) - (numColumns * columnSpacing) / 2 + columnSpacing / 2 + (col * 5); 
+        object.position.y = -(row * rowSpacing) + (numRows * rowSpacing) / 2 - rowSpacing / 2 + (row * 5); 
         object.position.z = Math.random() * 4000 - 2000;
 
         scene.add(object);
@@ -126,6 +126,7 @@ function simpleObjectsLayout(tableData) {
         tableLayout(tableData, i, col, row);
     }
 }
+
 
 
 
