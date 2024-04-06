@@ -191,8 +191,8 @@ function htmlElement(tableData, i) {
 function elementClickHandler(i) {
     transform(targets.table, 1000);
 
-    const index = Math.floor(i / 5); // Ensure index is an integer
-    const targetPosition = targets.simple[index].position;
+    //const index = Math.floor(i / 5); // Ensure index is an integer
+    const targetPosition = targets.simple[i].position;
 
     new TWEEN.Tween(targetPosition)
         .to({
