@@ -136,18 +136,19 @@ function htmlElement(tableData, i) {
 
     // Set border color based on Net Worth
     if (netWorth < 100000) {
-        element.style.borderColor = 'rgba(255, 0, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Red
-        element.style.boxShadow = '0 0 10px rgba(255, 0, 0, 0.5)'; // Red shadow
-        element.style.background = 'linear-gradient(to bottom, rgba(255, 0, 0, 0.25), transparent)'; // Red gradient
+        element.style.borderColor = 'rgba(239, 48, 34)'; // Red
+        element.style.boxShadow = '0 0 10px rgba(239, 48, 34, 0.5)'; // Red shadow
+        element.style.background = 'linear-gradient(to bottom, rgba(239, 48, 34, 0.25), transparent)'; // Red gradient
     } else if (netWorth >= 100000 && netWorth < 200000) {
-        element.style.borderColor = 'rgba(255, 165, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Orange
-        element.style.boxShadow = '0 0 10px rgba(255, 165, 0, 0.5)'; // Orange shadow
-        element.style.background = 'linear-gradient(to bottom, rgba(255, 165, 0, 0.25), transparent)'; // Orange gradient
+        element.style.borderColor = 'rgba(253, 202, 53)'; // Orange
+        element.style.boxShadow = '0 0 10px rgba(253, 202, 53, 0.5)'; // Orange shadow
+        element.style.background = 'linear-gradient(to bottom, rgba(253, 202, 53, 0.25), transparent)'; // Orange gradient
     } else {
-        element.style.borderColor = 'rgba(0, 255, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Green
-        element.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.5)'; // Green shadow
-        element.style.background = 'linear-gradient(to bottom, rgba(0, 255, 0, 0.25), transparent)'; // Green gradient
+        element.style.borderColor = 'rgba(58, 159, 72)'; // Green
+        element.style.boxShadow = '0 0 10px rgba(58, 159, 72, 0.5)'; // Green shadow
+        element.style.background = 'linear-gradient(to bottom, rgba(58, 159, 72, 0.25), transparent)'; // Green gradient
     }
+    
     
  
     element.style.borderWidth = '4px'; 
