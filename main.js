@@ -199,11 +199,13 @@ function htmlElement(tableData, i) {
 
 
 
-function elementClickHandler(i){
+function elementClickHandler(i) {
+    transform(targets.table, 1000);
 
-    transform(targets.table,1000);
+    const index = Math.floor(i / 5); // Ensure index is an integer
+    const targetPosition = targets.simple[index].position;
 
-    new TWEEN.Tween(targets.simple[i / 5].position)
+    new TWEEN.Tween(targetPosition)
         .to({
             x: 0,
             y: 0,
@@ -217,6 +219,7 @@ function elementClickHandler(i){
         .onUpdate(render)
         .start();
 }
+
 
 function tableLayout(table, index, col, row) {
     let object = new THREE.Object3D();
