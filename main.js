@@ -121,17 +121,21 @@ function simpleObjectsLayout(tableData) {
 
 
 function htmlElement(tableData, i) {
+    
     let element = document.createElement('div');
     element.className = 'element';
     let netWorth = parseFloat(tableData[i][5].replace(/[^0-9.-]+/g,"")); // Extract numeric value from Net Worth
 
-    // Set background color based on Net Worth
+    // Set border color based on Net Worth
     if (netWorth < 100000) {
-        element.style.backgroundColor = 'rgba(255, 0, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Red
+        element.style.borderColor = 'rgba(255, 0, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Red
+        element.style.boxShadow = '0 0 10px rgba(255, 0, 0, 0.5)'; // Red shadow
     } else if (netWorth >= 100000 && netWorth < 200000) {
-        element.style.backgroundColor = 'rgba(255, 165, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Orange
+        element.style.borderColor = 'rgba(255, 165, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Orange
+        element.style.boxShadow = '0 0 10px rgba(255, 165, 0, 0.5)'; // Orange shadow
     } else {
-        element.style.backgroundColor = 'rgba(0, 255, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Green
+        element.style.borderColor = 'rgba(0, 255, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Green
+        element.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.5)'; // Green shadow
     }
 
     let name = document.createElement('div');
