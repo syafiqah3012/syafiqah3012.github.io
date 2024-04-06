@@ -124,6 +124,7 @@ function simpleObjectsLayout(tableData) {
 
 
 function htmlElement(tableData, i) {
+    console.log('Data for htmlElement:', tableData[i]);
 
     let element = document.createElement('div');
     element.className = 'element';
