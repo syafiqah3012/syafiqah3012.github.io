@@ -141,7 +141,7 @@ function htmlElement(tableData, i) {
         element.style.background = 'linear-gradient(to bottom, rgba(0, 255, 0, 0.25), transparent)'; // Green gradient
     }
     
-    // Adjust border thickness
+ 
     element.style.borderWidth = '4px'; 
 
     let name = document.createElement('div');
@@ -193,10 +193,19 @@ function elementClickHandler(i){
 function tableLayout(table, index, col, row) {
     let object = new THREE.Object3D();
 
-    object.position.x = (col * 140) - 1330;
-    object.position.y = -(row * 180) + 990;
+    const objectWidth = 240; 
+    const objectHeight = 300; 
+    const numColumns = 20; 
+
+    const x = (index % numColumns) * objectWidth;
+    const y = -Math.floor(index / numColumns) * objectHeight;
+
+    object.position.x = x;
+    object.position.y = y;
+
     targets.table.push(object);
 }
+
 
 function addClickListener(target, elementId) {
 
