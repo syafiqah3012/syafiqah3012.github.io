@@ -67,6 +67,7 @@ function initRenderer() {
     renderer = new THREE.CSS3DRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.getElementById('container').appendChild(renderer.domElement);
+    composer = new THREE.EffectComposer(renderer);
 }
 
 function initObjects() {
@@ -314,5 +315,8 @@ function animate() {
     requestAnimationFrame(animate);
     TWEEN.update();
     controls.update();
-    composer.render();
+    
+    if (composer) {
+        composer.render();
+    }
 }
