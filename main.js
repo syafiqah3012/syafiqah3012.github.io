@@ -130,16 +130,19 @@ function htmlElement(tableData, i) {
     if (netWorth < 100000) {
         element.style.borderColor = 'rgba(255, 0, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Red
         element.style.boxShadow = '0 0 10px rgba(255, 0, 0, 0.5)'; // Red shadow
+        element.style.background = 'linear-gradient(to bottom, rgba(255, 0, 0, 0.25), transparent)'; // Red gradient
     } else if (netWorth >= 100000 && netWorth < 200000) {
         element.style.borderColor = 'rgba(255, 165, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Orange
         element.style.boxShadow = '0 0 10px rgba(255, 165, 0, 0.5)'; // Orange shadow
+        element.style.background = 'linear-gradient(to bottom, rgba(255, 165, 0, 0.25), transparent)'; // Orange gradient
     } else {
         element.style.borderColor = 'rgba(0, 255, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Green
         element.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.5)'; // Green shadow
+        element.style.background = 'linear-gradient(to bottom, rgba(0, 255, 0, 0.25), transparent)'; // Green gradient
     }
     
     // Adjust border thickness
-    element.style.borderWidth = '4px'; // Set the border width to 3 pixels
+    element.style.borderWidth = '4px'; 
 
     let name = document.createElement('div');
     name.className = 'name';
