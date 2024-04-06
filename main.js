@@ -106,20 +106,29 @@ function simpleObjectsLayout(tableData) {
 
     const numColumns = 20;
     const numRows = 10;
+    const numObjects = tableData.length;
 
-    for (let i = 0; i < tableData.length; i++) {
+    for (let i = 0; i < numObjects; i++) {
         let object = new THREE.CSS3DObject(htmlElement(tableData, i));
-        const col = i / 5 % numColumns;
-        const row = Math.floor(i / 5 / numColumns);
-        object.position.x = (col * 140) - (numColumns * 140) / 2 + 70; 
-        object.position.y = -(row * 180) + (numRows * 180) / 2 - 90; 
+        
+        // Calculate column and row based on the index
+        const col = i % numColumns;
+        const row = Math.floor(i / numColumns);
+
+        // Calculate position based on column and row
+        object.position.x = (col * 150) - 1330; // Assuming fixed spacing between columns
+        object.position.y = -(row * 200) + 990; // Assuming fixed spacing between rows
         object.position.z = Math.random() * 4000 - 2000;
+
+        // Add click event listener
+        object.element.addEventListener('click', () => elementClickHandler(i), false);
 
         scene.add(object);
         targets.simple.push(object);
         tableLayout(tableData, i, col, row);
     }
-} 
+}
+
 
 
 // Define the htmlElement function
