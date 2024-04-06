@@ -107,7 +107,7 @@ function simpleObjectsLayout(tableData) {
     const numColumns = 20;
     const numRows = 10;
 
-    for (let i = 0; i < tableData.length; i += 5) {
+    for (let i = 0; i < tableData.length; i++) {
         let object = new THREE.CSS3DObject(htmlElement(tableData, i));
         const col = i / 5 % numColumns;
         const row = Math.floor(i / 5 / numColumns);
