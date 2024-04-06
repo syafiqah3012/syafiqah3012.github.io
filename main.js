@@ -106,16 +106,16 @@ function simpleObjectsLayout(tableData) {
 
     const numColumns = 20;
     const numRows = 10;
-    const columnSpacing = 150; // Initial spacing between columns
+   /* const columnSpacing = 150; // Initial spacing between columns
     const rowSpacing = 200; // Initial spacing between rows
     const minSpacing = 200; // Minimum spacing to prevent overlap
     const numObjects = tableData.length;
     const totalWidth = numColumns * columnSpacing;
-    const totalHeight = numRows * rowSpacing;
+    const totalHeight = numRows * rowSpacing;*/
     
     // Calculate dynamic spacing to fit within the layout area without overlap
-    const adjustedColumnSpacing = Math.min(columnSpacing, totalWidth / numColumns - minSpacing);
-    const adjustedRowSpacing = Math.min(rowSpacing, totalHeight / numRows - minSpacing);
+   /* const adjustedColumnSpacing = Math.min(columnSpacing, totalWidth / numColumns - minSpacing);
+    const adjustedRowSpacing = Math.min(rowSpacing, totalHeight / numRows - minSpacing);*/
 
     for (let i = 0; i < numObjects; i++) {
         let object = new THREE.CSS3DObject(htmlElement(tableData, i));
@@ -134,12 +134,6 @@ function simpleObjectsLayout(tableData) {
         tableLayout(tableData, i, col, row);
     }
 }
-
-
-
-
-
-
 
 
 // Define the htmlElement function
