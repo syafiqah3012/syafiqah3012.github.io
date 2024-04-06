@@ -126,7 +126,9 @@ function simpleObjectsLayout(tableData) {
 
 // Define the htmlElement function
 function htmlElement(tableData, i) {
-    console.log('Data for htmlElement:', tableData[i]);
+    console.log('Index:', i);
+    console.log('Data:', tableData[i]);
+
 
     let element = document.createElement('div');
     element.className = 'element';
@@ -171,12 +173,6 @@ function htmlElement(tableData, i) {
     return element;
 }
 
-// Loop over all rows in tableData
-for (let i = 0; i < tableData.length; i++) {
-    // Call htmlElement function for each index
-    const element = htmlElement(tableData, i);
-    // Process the generated element or append it to a container
-}
 
 
 
