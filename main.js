@@ -198,7 +198,6 @@ function elementClickHandler(i){
 }
 
 function tableLayout(table, index, col, row) {
-    // No need to create a new Object3D here as it's already done in simpleObjectsLayout
     const objectWidth = 240; 
     const objectHeight = 300; 
     const numColumns = 20; 
@@ -206,9 +205,14 @@ function tableLayout(table, index, col, row) {
     const x = (index % numColumns) * objectWidth;
     const y = -Math.floor(index / numColumns) * objectHeight;
 
-    // Adjust the existing object position
-    targets.table[index].position.x = x;
-    targets.table[index].position.y = y;
+    // Check if the targets.table array has the element at the specified index
+    if (targets.table.length > index) {
+        // Adjust the existing object position
+        targets.table[index].position.x = x;
+        targets.table[index].position.y = y;
+    } else {
+        console.error('Error: targets.table does not have the element at index', index);
+    }
 }
 
 
