@@ -127,17 +127,17 @@ function htmlElement(tableData, i) {
 
     let name = document.createElement('div');
     name.className = 'name';
-    name.textContent = tableData[i]; // Assuming Name is at the first position
+    name.textContent = tableData[i][0]; // Name is in the first column (A)
     element.appendChild(name);
 
     let image = document.createElement('img');
-    image.src = tableData[i + 1]; // Assuming Photo is at the second position
+    image.src = tableData[i][1]; // Photo is in the second column (B)
     image.style.maxWidth = '100%'; // Ensure the image fits in the container
     element.appendChild(image);
 
     let details = document.createElement('div');
     details.className = 'details';
-    details.innerHTML = `Age: ${tableData[i + 2]}<br>Country: ${tableData[i + 3]}<br>Interest: ${tableData[i + 4]}<br>Net Worth: ${tableData[i + 5]}`;
+    details.innerHTML = `Age: ${tableData[i][2]}<br>Country: ${tableData[i][3]}<br>Interest: ${tableData[i][4]}<br>Net Worth: ${tableData[i][5]}`;
     element.appendChild(details);
 
     // Use an IIFE to create a closure around the current value of i
@@ -147,6 +147,7 @@ function htmlElement(tableData, i) {
 
     return element;
 }
+
 
 
 
