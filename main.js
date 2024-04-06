@@ -3,7 +3,7 @@ const apiKey = 'AIzaSyBu5Cbjy0Bu-y6P7dVAjOy1eWdrhxVEUN4';
 const sheetId = '1fcldAYsE92IPwbhfAQs1PMVcHW8WNM_r2L4CkoKrJD0';
 const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/A2:F201?key=${apiKey}`;
 
-let camera, scene, renderer, controls, composer;
+let camera, scene, renderer, controls;
 var hblur, vblur;
 let targets = {simple: [], table: [], sphere: [], helix: [], grid: []};
 
@@ -320,6 +320,6 @@ function animate() {
     requestAnimationFrame(animate);
     TWEEN.update();
     controls.update();
-    composer.render();
+
     
 }
