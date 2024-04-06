@@ -1,7 +1,8 @@
 // Google Sheets API
 const apiKey = 'AIzaSyBu5Cbjy0Bu-y6P7dVAjOy1eWdrhxVEUN4';
 const sheetId = '1fcldAYsE92IPwbhfAQs1PMVcHW8WNM_r2L4CkoKrJD0';
-const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/A2:F201?key=${apiKey}`;
+const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values?key=${apiKey}`;
+
 
 let camera, scene, renderer, controls;
 var hblur, vblur;
@@ -31,8 +32,8 @@ function init() {
     })
     .then(data => {
         if (data && data.values) {
-            const tableData = data.values; // Assign fetched data to tableData
-            initObjects(tableData); // Pass tableData to initObjects
+            const tableData = data.values; 
+            initObjects(tableData); 
             addClickListeners();
             transform(targets.table, 2000);
             window.addEventListener('resize', onWindowResize, false);
@@ -148,13 +149,12 @@ function htmlElement(tableData, i) {
 
     let name = document.createElement('div');
     name.className = 'name';
-    name.textContent = tableData[i][0]; // Name is in the first column (A)
+    name.textContent = tableData[i][0]; 
     element.appendChild(name);
 
     let image = document.createElement('img');
-    image.src = tableData[i][1]; // Photo is in the second column (B)
-   // image.style.maxWidth = '100%'; // Ensure the image fits in the container
-    image.className = 'photo'; // Apply the 'photo' class for styling
+    image.src = tableData[i][1]; 
+    image.className = 'photo'; 
     element.appendChild(image);
 
     let details = document.createElement('div');
@@ -162,7 +162,6 @@ function htmlElement(tableData, i) {
     details.innerHTML = `Age: ${tableData[i][2]}<br>Country: ${tableData[i][3]}<br>Interest: ${tableData[i][4]}<br>Net Worth: ${tableData[i][5]}`;
     element.appendChild(details);
 
-    // Use an IIFE to create a closure around the current value of i
     (function(index) {
         element.addEventListener('click', () => elementClickHandler(index), false);
     })(i);
