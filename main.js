@@ -97,6 +97,11 @@ function addClickListeners() {
 }
 
 function simpleObjectsLayout(tableData) {
+    if (!Array.isArray(tableData) || tableData.length === 0) {
+        console.error('Error: tableData is not an array or is empty.');
+        return;
+    }
+
     const numColumns = 20;
     const numRows = 10;
 
@@ -113,6 +118,7 @@ function simpleObjectsLayout(tableData) {
         tableLayout(tableData, i, col, row);
     }
 }
+
 
 function htmlElement(tableData, i) {
     let element = document.createElement('div');
