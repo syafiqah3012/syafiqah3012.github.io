@@ -31,8 +31,8 @@ function init() {
     })
     .then(data => {
         if (data && data.values) {
-            const table = data.values; // No need to flatten the array
-            initObjects(table);
+            const tableData = data.values; // Assign fetched data to tableData
+            initObjects(tableData); // Pass tableData to initObjects
             addClickListeners();
             transform(targets.table, 2000);
             window.addEventListener('resize', onWindowResize, false);
@@ -77,7 +77,7 @@ function initRenderer() {
 
 function initObjects() {
 
-    simpleObjectsLayout();
+    simpleObjectsLayout(tableData);
     generateGeometricLayouts();
 
 }
@@ -91,12 +91,12 @@ function addClickListeners() {
 
 }
 
-function simpleObjectsLayout() {
+function simpleObjectsLayout(tableData) {
     const numColumns = 20;
     const numRows = 10;
 
-    for (let i = 0; i < table.length; i += 5) {
-        let object = new THREE.CSS3DObject(htmlElement(table, i));
+    for (let i = 0; i < tableData.length; i += 5) {
+        let object = new THREE.CSS3DObject(htmlElement(tableData, i));
         const col = i / 5 % numColumns;
         const row = Math.floor(i / 5 / numColumns);
         object.position.x = (col * 140) - (numColumns * 140) / 2 + 70; 
@@ -105,7 +105,7 @@ function simpleObjectsLayout() {
 
         scene.add(object);
         targets.simple.push(object);
-        tableLayout(table, i, col, row);
+        tableLayout(tableData, i, col, row);
     }
 }
 
