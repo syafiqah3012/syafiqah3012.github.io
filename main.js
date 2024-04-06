@@ -98,6 +98,7 @@ function addClickListeners() {
 }
 
 function simpleObjectsLayout(tableData) {
+    console.log('Data:', tableData);
     if (!Array.isArray(tableData) || tableData.length === 0) {
         console.error('Error: tableData is not an array or is empty.');
         return;
@@ -123,6 +124,7 @@ function simpleObjectsLayout(tableData) {
 
 
 
+// Define the htmlElement function
 function htmlElement(tableData, i) {
     console.log('Data for htmlElement:', tableData[i]);
 
@@ -163,11 +165,17 @@ function htmlElement(tableData, i) {
     details.innerHTML = `Age: ${tableData[i][2]}<br>Country: ${tableData[i][3]}<br>Interest: ${tableData[i][4]}<br>Net Worth: ${tableData[i][5]}`;
     element.appendChild(details);
 
-    (function(index) {
-        element.addEventListener('click', () => elementClickHandler(index), false);
-    })(i);
+    // Add click event listener
+    element.addEventListener('click', () => elementClickHandler(i), false);
 
     return element;
+}
+
+// Loop over all rows in tableData
+for (let i = 0; i < tableData.length; i++) {
+    // Call htmlElement function for each index
+    const element = htmlElement(tableData, i);
+    // Process the generated element or append it to a container
 }
 
 
