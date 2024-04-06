@@ -23,17 +23,21 @@ function init() {
     initRenderer();
 
     fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-        const tableData = data.values.flat(); // Flatten the 2D array
-        initObjects(tableData);
-        addClickListeners();
-        transform(targets.table, 2000);
-        window.addEventListener('resize', onWindowResize, false);
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.values) {
+                const tableData = data.values.flat(); // Flatten the 2D array
+                initObjects(tableData);
+                addClickListeners();
+                transform(targets.table, 2000);
+                window.addEventListener('resize', onWindowResize, false);
+            } else {
+                console.error('Error: Data values are missing or invalid.');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
 
     initTrackbarControls();
 
