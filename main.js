@@ -121,7 +121,7 @@ function simpleObjectsLayout(tableData) {
 
 
 function htmlElement(tableData, i) {
-    
+
     let element = document.createElement('div');
     element.className = 'element';
     let netWorth = parseFloat(tableData[i][5].replace(/[^0-9.-]+/g,"")); // Extract numeric value from Net Worth
@@ -137,6 +137,9 @@ function htmlElement(tableData, i) {
         element.style.borderColor = 'rgba(0, 255, 0,' + (Math.random() * 0.5 + 0.25) + ')'; // Green
         element.style.boxShadow = '0 0 10px rgba(0, 255, 0, 0.5)'; // Green shadow
     }
+    
+    // Adjust border thickness
+    element.style.borderWidth = '4px'; // Set the border width to 3 pixels
 
     let name = document.createElement('div');
     name.className = 'name';
