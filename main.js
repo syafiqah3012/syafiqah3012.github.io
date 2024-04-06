@@ -108,7 +108,7 @@ function simpleObjectsLayout(tableData) {
     const numRows = 10;
     const columnSpacing = 150; // Initial spacing between columns
     const rowSpacing = 200; // Initial spacing between rows
-    const minSpacing = 50; // Minimum spacing to prevent overlap
+    const minSpacing = 200; // Minimum spacing to prevent overlap
     const numObjects = tableData.length;
     const totalWidth = numColumns * columnSpacing;
     const totalHeight = numRows * rowSpacing;
@@ -216,18 +216,12 @@ function elementClickHandler(i){
 }
 
 function tableLayout(table, index, col, row) {
-    const columnSpacing = 140; // Adjust spacing between columns
-    const rowSpacing = 180; // Adjust spacing between rows
-
     let object = new THREE.Object3D();
 
-    // Calculate position based on column and row, adjusting spacing
-    object.position.x = (col * columnSpacing) - (columnSpacing * table.numColumns) / 2 + columnSpacing / 2;
-    object.position.y = -(row * rowSpacing) + (rowSpacing * table.numRows) / 2 - rowSpacing / 2;
-
+    object.position.x = (col * 140) - 1330;
+    object.position.y = -(row * 180) + 990;
     targets.table.push(object);
 }
-
 
 
 function addClickListener(target, elementId) {
