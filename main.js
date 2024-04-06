@@ -186,8 +186,11 @@ function htmlElement(tableData, i) {
     details.innerHTML = `Age: ${tableData[i][2]}<br>Country: ${tableData[i][3]}<br>Interest: ${tableData[i][4]}<br>Net Worth: ${tableData[i][5]}`;
     element.appendChild(details);
 
-    // Add click event listener
-    element.addEventListener('click', () => elementClickHandler(i), false);
+     // Add click event listener
+     element.addEventListener('click', () => {
+        console.log('Element clicked:', i);
+        elementClickHandler(i);
+    }, false);
 
     return element;
 }
