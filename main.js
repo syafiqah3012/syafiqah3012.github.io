@@ -106,8 +106,8 @@ function simpleObjectsLayout(tableData) {
 
     const numColumns = 20;
     const numRows = 10;
-    const columnSpacing = 140;
-    const rowSpacing = 180;
+    const columnSpacing = 150; // Adjust spacing between columns
+    const rowSpacing = 200; // Adjust spacing between rows
 
     for (let i = 0; i < tableData.length; i++) {
         let object = new THREE.CSS3DObject(htmlElement(tableData, i));
@@ -117,8 +117,8 @@ function simpleObjectsLayout(tableData) {
         const row = Math.floor(i / numColumns);
 
         // Calculate position based on column and row, adding additional offsets to prevent overlap
-        object.position.x = (col * columnSpacing) - (numColumns * columnSpacing) / 2 + columnSpacing / 2 + (col * 5); 
-        object.position.y = -(row * rowSpacing) + (numRows * rowSpacing) / 2 - rowSpacing / 2 + (row * 5); 
+        object.position.x = (col * columnSpacing) - (numColumns * columnSpacing) / 2 + columnSpacing / 2; 
+        object.position.y = -(row * rowSpacing) + (numRows * rowSpacing) / 2 - rowSpacing / 2; 
         object.position.z = Math.random() * 4000 - 2000;
 
         scene.add(object);
@@ -126,6 +126,7 @@ function simpleObjectsLayout(tableData) {
         tableLayout(tableData, i, col, row);
     }
 }
+
 
 
 
