@@ -127,12 +127,11 @@ function htmlElement(tableData, i) {
 
     let name = document.createElement('div');
     name.className = 'name';
-    name.textContent = tableData[i];
+    name.textContent = tableData[i]; // Assuming Name is at the first position
     element.appendChild(name);
 
     let image = document.createElement('img');
-    image.src = tableData[i + 1]; // Assuming the photo link is in the second position in each row
-    // You may need to adjust this index based on your actual data structure
+    image.src = tableData[i + 1]; // Assuming Photo is at the second position
     image.style.maxWidth = '100%'; // Ensure the image fits in the container
     element.appendChild(image);
 
@@ -148,6 +147,7 @@ function htmlElement(tableData, i) {
 
     return element;
 }
+
 
 
 function elementClickHandler(i){
