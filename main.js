@@ -320,5 +320,6 @@ function animate() {
     requestAnimationFrame(animate);
     TWEEN.update();
     controls.update();
+    composer.render();
     
 }
