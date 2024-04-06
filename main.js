@@ -104,13 +104,20 @@ function simpleObjectsLayout(tableData) {
 
     const numColumns = 20;
     const numRows = 10;
+    const objectWidth = 240; // Width of each object
+    const objectHeight = 300; // Height of each object
 
     for (let i = 0; i < tableData.length; i += 5) {
         let object = new THREE.CSS3DObject(htmlElement(tableData, i));
         const col = i / 5 % numColumns;
         const row = Math.floor(i / 5 / numColumns);
-        object.position.x = (col * 140) - (numColumns * 140) / 2 + 70; 
-        object.position.y = -(row * 180) + (numRows * 180) / 2 - 90; 
+        
+        // Calculate the position based on column and row
+        const x = col * objectWidth; 
+        const y = -row * objectHeight;
+
+        object.position.x = x;
+        object.position.y = y;
         object.position.z = Math.random() * 4000 - 2000;
 
         scene.add(object);
@@ -191,8 +198,7 @@ function elementClickHandler(i){
 }
 
 function tableLayout(table, index, col, row) {
-    let object = new THREE.Object3D();
-
+    // No need to create a new Object3D here as it's already done in simpleObjectsLayout
     const objectWidth = 240; 
     const objectHeight = 300; 
     const numColumns = 20; 
@@ -200,10 +206,9 @@ function tableLayout(table, index, col, row) {
     const x = (index % numColumns) * objectWidth;
     const y = -Math.floor(index / numColumns) * objectHeight;
 
-    object.position.x = x;
-    object.position.y = y;
-
-    targets.table.push(object);
+    // Adjust the existing object position
+    targets.table[index].position.x = x;
+    targets.table[index].position.y = y;
 }
 
 
