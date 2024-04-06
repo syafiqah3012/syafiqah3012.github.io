@@ -7,30 +7,30 @@
     <style>
         html, body {
             height: 100%;
-        }
-
-        body {
-            background-color: #000000;
             margin: 0;
             font-family: Helvetica, sans-serif;
             overflow: hidden;
         }
 
+        body {
+            background-color: #000000;
+        }
+
         #container {
             position: absolute;
             top: 0;
-            bottom: 40px; /* Adjusted to accommodate the menu */
+            bottom: 40px;
             width: 100%;
-            overflow-y: scroll; /* Enable scrolling if content exceeds viewport */
+            overflow-y: scroll;
         }
 
         .element {
-            width: 180px; /* Increased width to accommodate photo */
-            height: 240px; /* Increased height to accommodate photo and details */
+            width: 240px; /* Increased width to accommodate the content */
+            height: 300px; /* Increased height to accommodate the content */
             box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
             border: 1px solid rgba(127, 255, 255, 0.25);
             text-align: center;
-            cursor: default;
+            cursor: pointer;
             margin: 10px; /* Add margin between elements */
             float: left; /* Float elements to arrange them horizontally */
             position: relative; /* Positioning for details */
@@ -45,17 +45,17 @@
         .element .photo {
             width: 120px; /* Size of the photo */
             height: 120px; /* Size of the photo */
-            margin-top: 20px; /* Adjusted margin to center photo vertically */
+            margin-top: 50px; /* Adjusted margin to center photo vertically */
             border-radius: 50%; /* Rounded photo */
         }
 
         .element .details {
             position: absolute;
-            bottom: 15px;
+            bottom: 10px;
             left: 0;
             right: 0;
             color: rgba(127, 255, 255, 0.75);
-            text-align: left; /* Align text to left */
+            text-align: center; /* Align text to center */
             padding: 0 10px; /* Add padding to details */
         }
 
